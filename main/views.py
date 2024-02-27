@@ -1,10 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from goods.models import Categories
+
 
 # Create your views here.
 def index(request):
-    context = {"title": "Home - Main page", "content": "Online Guitar Store"}
+    categories = Categories.objects.all()
+    context = {
+        "title": "Home - Main page",
+        "content": "Online Guitar Store",
+        "categories": categories,
+    }
 
     return render(request, "main/index.html", context)
 
