@@ -24,7 +24,7 @@ class Products(models.Model):
     slug = models.SlugField(
         max_length=200, unique=True, blank=True, null=True, verbose_name="URL"
     )
-    desctiprion = models.TextField(blank=True, null=True, verbose_name="Description")
+    description = models.TextField(blank=True, null=True, verbose_name="Description")
     image = models.ImageField(
         upload_to="goods/images", blank=True, verbose_name="Image"
     )
@@ -43,6 +43,7 @@ class Products(models.Model):
         db_table = "product"
         verbose_name = "Product"
         verbose_name_plural = "Products"
+        ordering = ("id",)
 
     def __str__(self) -> str:
         return f"{self.name} Quantity - {self.quantity}"
