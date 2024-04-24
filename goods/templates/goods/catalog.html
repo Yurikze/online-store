@@ -12,7 +12,7 @@
     </button>
 
     <form
-      action=""
+      action="{% url "catalog:index" slug_url %}"
       method="get"
       class="dropdown-menu bg-dark"
       data-bs-theme="dark"
@@ -24,8 +24,11 @@
           name="on_sale"
           id="flexCheckDefault"
           value="on"
+          {% if request.GET.on_sale == 'on' %}
+          checked
+          {% endif %}
         />
-        <input type="hidden" name="q" value="request.GET.q" />
+        {% comment %} <input type="hidden" name="q" value="request.GET.q" /> {% endcomment %}
         <label class="form-check-label" for="flexCheckDefault">
           Товары по акции
         </label>
@@ -38,7 +41,7 @@
           name="order_by"
           id="flexRadioDefault1"
           value="default"
-          checked
+          {% if not request.GET.order_by or request.GET.order_by == 'default' %}checked{% endif %}
         />
         <label class="form-check-label" for="flexRadioDefault1">
           По умолчанию
@@ -51,6 +54,7 @@
           name="order_by"
           id="flexRadioDefault2"
           value="price"
+          {% if request.GET.order_by == 'price' %}checked{% endif %}
         />
         <label class="form-check-label" for="flexRadioDefault2">
           От дешевых к дорогим
@@ -63,6 +67,7 @@
           name="order_by"
           id="flexRadioDefault3"
           value="-price"
+          {% if request.GET.order_by == '-price' %}checked{% endif %}
         />
         <label class="form-check-label" for="flexRadioDefault3">
           От дорогих к дешевым
